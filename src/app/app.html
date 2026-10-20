@@ -1,17 +1,81 @@
-<header class="encabezado">
-  <div class="marca">
-    <h1>{{ info.nombre }}</h1>
-    <span>{{ info.eslogan }}</span>
+<div class="app">
+  <aside class="lateral" aria-label="Barra lateral">
+    <a class="marca" routerLink="/">
+      <span class="logo" aria-hidden="true">σ</span>
+      <span><h1>{{ info.nombre }}</h1><small>{{ info.eslogan }}</small></span>
+    </a>
+    <nav aria-label="Módulos">
+      @for (m of menu; track m.ruta) {
+        <a [routerLink]="m.ruta" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: m.ruta === '/' }">
+          <app-icono [n]="m.icono" />{{ m.texto }}
+        </a>
+      }
+    </nav>
+    <div class="tarjeta-equipo">
+      @for (i of info.integrantes; track i.carne) {
+        <div><strong>{{ i.nombre }}</strong><small>{{ i.carne }}</small></div>
+      }
+      <div>{{ info.asignatura }} · {{ info.seccion }}</div>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <a class="marca" routerLink="/">
+      <span class="logo" aria-hidden="true">σ</span>
+      <span><h1>{{ info.nombre }}</h1><small>{{ info.eslogan }}</small></span>
+    </a>
+    <button type="button" class="btn-equipo" (click)="abrirEquipo()" aria-haspopup="dialog">
+      <app-icono n="equipo" /><span>Equipo</span>
+    </button>
+    <button type="button" class="btn-icono" (click)="tema.alternar()"
+      [attr.aria-label]="tema.modo() === 'oscuro' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'">
+      <app-icono [n]="tema.modo() === 'oscuro' ? 'sol' : 'luna'" />
+    </button>
+  </header>
+
+  <main class="contenido" id="contenido"><router-outlet /></main>
+
+  <footer class="pie">
+    {{ info.universidad }} · {{ info.integrantes[0].nombre }} ({{ info.integrantes[0].carne }}) y
+    {{ info.integrantes[1].nombre }} ({{ info.integrantes[1].carne }}) · {{ info.asignatura }} · {{ info.seccion }}
+  </footer>
+
+  <nav class="nav-inferior" aria-label="Módulos principales">
+    @for (m of principales; track m.ruta) {
+      <a [routerLink]="m.ruta" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: m.ruta === '/' }">
+        <span class="pastilla"><app-icono [n]="m.icono" /></span>{{ m.texto }}
+      </a>
+    }
+    <button type="button" (click)="abrirMas()" aria-haspopup="dialog">
+      <span class="pastilla"><app-icono n="mas" /></span>Más
+    </button>
+  </nav>
+</div>
+
+<dialog class="hoja" #dlgMas aria-label="Más módulos" (click)="cerrarAlFondo($event, dlgMas)">
+  <header>
+    <h2>Más módulos</h2>
+    <button type="button" class="btn-icono" (click)="cerrarMas()" aria-label="Cerrar"><app-icono n="cerrar" /></button>
+  </header>
+  <div class="lista-menu">
+    @for (m of secundarios; track m.ruta) {
+      <a [routerLink]="m.ruta" routerLinkActive="activo" (click)="cerrarMas()"><app-icono [n]="m.icono" />{{ m.texto }}</a>
+    }
   </div>
-  <div class="autores">
-    <span>{{ info.integrantes[0] }} · {{ info.integrantes[1] }}</span>
-    <span>{{ info.asignatura }} · {{ info.seccion }}</span>
-  </div>
-</header>
-<nav class="menu" aria-label="Módulos">
-  @for (m of menu; track m.ruta) {
-    <a [routerLink]="m.ruta" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: m.ruta === '/' }">{{ m.texto }}</a>
-  }
-</nav>
-<main class="contenido"><router-outlet /></main>
-<footer class="pie">{{ info.universidad }} · {{ info.integrantes[0] }} y {{ info.integrantes[1] }} · {{ info.asignatura }} · {{ info.seccion }}</footer>
+</dialog>
+
+<dialog class="modal" #dlgEquipo aria-label="Equipo del proyecto" (click)="cerrarAlFondo($event, dlgEquipo)">
+  <header>
+    <h2>Equipo del proyecto</h2>
+    <button type="button" class="btn-icono" (click)="cerrarEquipo()" aria-label="Cerrar"><app-icono n="cerrar" /></button>
+  </header>
+  <dl class="datos-equipo">
+    @for (i of info.integrantes; track i.carne) {
+      <dt>Integrante · Carné {{ i.carne }}</dt>
+      <dd>{{ i.nombre }}</dd>
+    }
+    <dt>Asignatura</dt><dd>{{ info.asignatura }}</dd>
+    <dt>Sección</dt><dd>{{ info.seccion }}</dd>
+    <dt>Institución</dt><dd>{{ info.universidad }}</dd>
+  </dl>
+</dialog>

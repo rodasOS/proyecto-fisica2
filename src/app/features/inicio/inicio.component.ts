@@ -24,6 +24,16 @@ import { INFO } from '../../app.info';
         <a class="tarjeta" [routerLink]="ruta(e.modulo)" [queryParams]="{ ejemplo: e.id }"><strong>{{ e.titulo }}</strong><span>{{ e.descripcion }}</span></a>
       }
     </div>
+    <h3 class="sep">Equipo</h3>
+    <div class="caja equipo-inicio">
+      @for (i of info.integrantes; track i.carne) {
+        <div class="persona">
+          <span class="avatar" aria-hidden="true">{{ i.nombre.charAt(0) }}</span>
+          <div><strong>{{ i.nombre }}</strong><small>Carné {{ i.carne }}</small></div>
+        </div>
+      }
+      <div class="persona"><div><strong>{{ info.asignatura }}</strong><small>{{ info.seccion }}</small></div></div>
+    </div>
     <h3 class="sep">Cómo usarlo</h3>
     <ol>
       <li>Elige un módulo y escribe tus propios datos (o carga un ejemplo).</li>

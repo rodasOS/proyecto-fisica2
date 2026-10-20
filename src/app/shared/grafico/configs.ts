@@ -2,8 +2,8 @@ import { ChartConfiguration } from 'chart.js';
 import { Clase } from '../../core/stats/frecuencias';
 import { fmt } from '../../core/stats/resultado.model';
 
-const COLOR = '#2563eb';
-const COLOR2 = '#dc2626';
+const COLOR = '#6366f1';
+const COLOR2 = '#f97316';
 
 export function histogramaConfig(clases: Clase[], unidad = ''): ChartConfiguration {
   return {

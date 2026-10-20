@@ -1,0 +1,60 @@
+@layer controles {
+  .campo { display: flex; flex-direction: column; gap: var(--e-1); flex: 1 1 14rem; min-width: 0; }
+  .campo.corto { flex: 0 1 12rem; }
+  .etiqueta { font-size: var(--t-0); font-weight: 600; color: var(--muted); }
+  .ayuda { font-size: 0.8rem; color: var(--muted); }
+
+  input[type='text'], textarea, select {
+    font: inherit;
+    font-size: 16px; /* evita zoom en iOS */
+    min-height: var(--toque);
+    padding: 0.55rem 0.8rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radio-s);
+    background: var(--surface);
+    color: var(--text);
+    width: 100%;
+    transition: border-color var(--mov, 0s), box-shadow var(--mov, 0s);
+    &:hover { border-color: color-mix(in srgb, var(--primary) 50%, var(--border)); }
+    &:focus-visible { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 28%, transparent); }
+    &::placeholder { color: color-mix(in srgb, var(--muted) 70%, transparent); }
+  }
+  textarea { resize: vertical; font-family: var(--mono); line-height: 1.5; }
+  select { appearance: auto; }
+  .casilla { display: flex; gap: var(--e-2); align-items: center; min-height: var(--toque); }
+  .casilla input { width: 1.25rem; height: 1.25rem; accent-color: var(--primary); }
+
+  button, a.enlace {
+    font: inherit; font-size: 16px; font-weight: 600;
+    min-height: var(--toque); padding: 0.55rem 1.1rem;
+    border-radius: var(--radio-s); border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--text); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--e-2);
+    text-decoration: none;
+    transition: background var(--mov, 0s), transform var(--mov, 0s), box-shadow var(--mov, 0s);
+    &:hover { background: var(--surface-2); }
+    &:active { transform: scale(0.98); }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+  button.primario, a.primario {
+    background: var(--primary); color: var(--on-primary); border-color: transparent;
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--primary) 35%, transparent);
+    &:hover { background: var(--primary-strong); }
+  }
+  button.secundario { background: var(--primary-soft); border-color: transparent; color: var(--primary); }
+
+  .ejemplos { display: flex; gap: var(--e-2); align-items: center; margin: 0 0 var(--e-3); overflow-x: auto; padding-bottom: var(--e-1); scrollbar-width: thin; }
+  .ejemplos .etiqueta { flex: none; }
+  .chip {
+    flex: none; min-height: 36px; padding: 0.3rem 0.9rem; border-radius: 999px; font-size: 0.875rem; font-weight: 500;
+    background: var(--primary-soft); color: var(--primary); border-color: transparent;
+    &:hover { background: color-mix(in srgb, var(--primary) 22%, var(--primary-soft)); }
+  }
+
+  .aviso, .sin-valor {
+    background: var(--warn-soft); color: var(--warn); border-left: 4px solid currentColor;
+    padding: var(--e-2) var(--e-3); border-radius: var(--radio-s); margin: var(--e-2) 0;
+  }
+  .aviso.error { background: var(--error-soft); color: var(--error); }
+  .aviso strong { font-weight: 700; }
+}

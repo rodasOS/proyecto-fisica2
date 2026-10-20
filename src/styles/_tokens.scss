@@ -1,0 +1,68 @@
+@layer base, controles, componentes, layout;
+
+:root {
+  color-scheme: light;
+  --bg: #f5f6fb;
+  --surface: #ffffff;
+  --surface-2: #eef0f8;
+  --text: #141824;
+  --muted: #566074;
+  --border: #dfe3ee;
+  --primary: #4f46e5;
+  --primary-strong: #4338ca;
+  --on-primary: #ffffff;
+  --primary-soft: #eceeff;
+  --accent: #0d9488;
+  --ok: #136a33;
+  --ok-soft: #e4f6ea;
+  --error: #b42318;
+  --error-soft: #fdeceb;
+  --warn: #8a5a00;
+  --warn-soft: #fff5dc;
+  --serie-1: #6366f1;
+  --serie-2: #f97316;
+
+  --fuente: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --t-0: clamp(0.875rem, 0.85rem + 0.1vw, 0.95rem);
+  --t-1: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --t-2: clamp(1.15rem, 1.05rem + 0.5vw, 1.375rem);
+  --t-3: clamp(1.45rem, 1.2rem + 1.1vw, 2rem);
+
+  --e-1: 0.25rem;
+  --e-2: 0.5rem;
+  --e-3: 0.75rem;
+  --e-4: 1rem;
+  --e-5: 1.5rem;
+  --e-6: 2rem;
+  --radio: 14px;
+  --radio-s: 10px;
+  --sombra: 0 1px 2px rgb(20 24 36 / 6%), 0 4px 16px rgb(20 24 36 / 6%);
+  --sombra-alta: 0 10px 40px rgb(20 24 36 / 18%);
+  --nav-inferior: 64px;
+  --lateral: 264px;
+  --toque: 44px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0d1017;
+  --surface: #151a24;
+  --surface-2: #1d2431;
+  --text: #e9edf5;
+  --muted: #9ba7bb;
+  --border: #2a3344;
+  --primary: #a5b4fc;
+  --primary-strong: #c7d2fe;
+  --on-primary: #0d1017;
+  --primary-soft: #232a4a;
+  --accent: #5eead4;
+  --ok: #6ee7a0;
+  --ok-soft: #12301f;
+  --error: #ff9b94;
+  --error-soft: #3a1917;
+  --warn: #f6cf6d;
+  --warn-soft: #33290f;
+  --sombra: 0 1px 2px rgb(0 0 0 / 40%), 0 4px 16px rgb(0 0 0 / 30%);
+  --sombra-alta: 0 10px 40px rgb(0 0 0 / 60%);
+}

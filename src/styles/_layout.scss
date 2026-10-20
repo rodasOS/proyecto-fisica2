@@ -1,0 +1,98 @@
+@layer layout {
+  /* se declara después de componentes: gana en igualdad de especificidad */
+  .app { min-height: 100dvh; display: flex; flex-direction: column; }
+  .topbar {
+    position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: var(--e-3);
+    padding: var(--e-2) var(--e-4); padding-top: max(var(--e-2), env(safe-area-inset-top));
+    background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .marca { display: flex; align-items: center; gap: var(--e-3); min-height: var(--toque); min-width: 0; flex: 1; text-decoration: none; color: var(--text); }
+  .logo { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 12px; display: grid; place-items: center; font-weight: 800; font-size: 1.25rem; color: #fff; background: linear-gradient(135deg, #4f46e5, #0d9488); }
+  .marca h1 { font-size: 1.15rem; letter-spacing: -0.01em; }
+  .topbar .marca small { display: none; }
+  .marca small { display: block; color: var(--muted); font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .btn-icono { min-width: var(--toque); padding: 0; border-radius: 50%; border-color: transparent; background: transparent; }
+  .btn-icono:hover { background: var(--surface-2); }
+  .btn-equipo span { display: none; }
+
+  .lateral { display: none; }
+  .contenido { flex: 1; width: 100%; max-width: 62rem; margin: 0 auto; padding: var(--e-4) 16px calc(var(--nav-inferior) + var(--e-5) + env(safe-area-inset-bottom)); min-width: 0; }
+  .pie { display: none; }
+
+  .nav-inferior {
+    position: fixed; inset: auto 0 0 0; z-index: 30; height: calc(var(--nav-inferior) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom); display: grid; grid-template-columns: repeat(5, 1fr);
+    background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--border);
+  }
+  .nav-inferior a, .nav-inferior button {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    min-height: var(--toque); border: 0; border-radius: 0; background: transparent; box-shadow: none;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: -0.01em; color: var(--muted); text-decoration: none; padding: 0;
+    &.activo { color: var(--primary); }
+    &:active { transform: none; background: var(--surface-2); }
+  }
+  .nav-inferior .pastilla { display: grid; place-items: center; width: 3.5rem; height: 1.9rem; border-radius: 999px; transition: background var(--mov, 0s); }
+  .nav-inferior .activo .pastilla { background: var(--primary-soft); }
+
+  dialog {
+    border: 0; padding: 0; color: var(--text); background: var(--surface); box-shadow: var(--sombra-alta);
+    &::backdrop { background: rgb(8 10 20 / 55%); backdrop-filter: blur(2px); }
+  }
+  dialog.hoja {
+    width: 100%; max-width: 100%; margin: auto 0 0; border-radius: 20px 20px 0 0; padding: var(--e-4) 16px calc(var(--e-5) + env(safe-area-inset-bottom));
+    max-height: 85dvh; overflow: auto;
+  }
+  dialog.modal { width: min(30rem, calc(100% - 2rem)); border-radius: var(--radio); padding: var(--e-5); }
+  dialog header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--e-3); }
+  dialog h2 { font-size: var(--t-2); margin: 0; }
+  .lista-menu { display: grid; gap: var(--e-1); }
+  .lista-menu a {
+    display: flex; align-items: center; gap: var(--e-3); min-height: 52px; padding: 0 var(--e-3); border-radius: var(--radio-s);
+    text-decoration: none; color: var(--text); font-weight: 500;
+    &:hover { background: var(--surface-2); }
+    &.activo { background: var(--primary-soft); color: var(--primary); }
+  }
+  .datos-equipo dt { color: var(--muted); font-size: 0.8rem; margin-top: var(--e-3); }
+  .datos-equipo dd { margin: 0; font-weight: 600; }
+
+  @media (min-width: 640px) {
+    .topbar .marca small { display: block; }
+    .contenido { padding-left: var(--e-5); padding-right: var(--e-5); }
+    .btn-equipo span { display: inline; }
+    .btn-equipo { padding: 0 var(--e-3); border-radius: 999px; border-color: var(--border); }
+  }
+
+  @media (min-width: 1024px) {
+    .app { display: grid; grid-template-columns: var(--lateral) 1fr; grid-template-rows: auto 1fr auto; }
+    .topbar { grid-column: 2; }
+    .marca { display: none; }
+    .topbar { justify-content: flex-end; }
+    .lateral {
+      display: flex; flex-direction: column; grid-row: 1 / -1; grid-column: 1; position: sticky; top: 0; height: 100dvh;
+      padding: var(--e-4); gap: var(--e-4); background: var(--surface); border-right: 1px solid var(--border); overflow-y: auto;
+    }
+    .lateral .marca { display: flex; flex: none; }
+    .lateral .marca small { white-space: normal; }
+    .lateral nav { display: grid; gap: 2px; }
+    .lateral nav a {
+      display: flex; align-items: center; gap: var(--e-3); min-height: var(--toque); padding: 0 var(--e-3); border-radius: var(--radio-s);
+      text-decoration: none; color: var(--text); font-weight: 500; font-size: var(--t-0);
+      &:hover { background: var(--surface-2); }
+      &.activo { background: var(--primary-soft); color: var(--primary); font-weight: 700; }
+    }
+    .tarjeta-equipo { margin-top: auto; padding: var(--e-3); border-radius: var(--radio); background: var(--surface-2); font-size: 0.8rem; display: grid; gap: var(--e-2); }
+    .tarjeta-equipo strong { display: block; font-size: 0.78rem; }
+    .tarjeta-equipo small { color: var(--muted); display: block; font-family: var(--mono); }
+    .contenido { grid-column: 2; padding-bottom: var(--e-6); padding-top: var(--e-5); }
+    .pie { display: block; grid-column: 2; text-align: center; padding: var(--e-4); font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); }
+    .nav-inferior, dialog.hoja { display: none !important; }
+    .btn-equipo { display: none; }
+  }
+
+  @media (max-width: 639px) {
+    .panel .fila > button, .panel .fila > .campo.corto { flex: 1 1 100%; }
+    .panel .fila > button.primario { order: 99; }
+  }
+}

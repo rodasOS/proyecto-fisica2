@@ -1,0 +1,17 @@
+<header class="encabezado">
+  <div class="marca">
+    <h1>{{ info.nombre }}</h1>
+    <span>{{ info.eslogan }}</span>
+  </div>
+  <div class="autores">
+    <span>{{ info.integrantes[0] }} · {{ info.integrantes[1] }}</span>
+    <span>{{ info.asignatura }} · {{ info.seccion }}</span>
+  </div>
+</header>
+<nav class="menu" aria-label="Módulos">
+  @for (m of menu; track m.ruta) {
+    <a [routerLink]="m.ruta" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: m.ruta === '/' }">{{ m.texto }}</a>
+  }
+</nav>
+<main class="contenido"><router-outlet /></main>
+<footer class="pie">{{ info.universidad }} · {{ info.integrantes[0] }} y {{ info.integrantes[1] }} · {{ info.asignatura }} · {{ info.seccion }}</footer>

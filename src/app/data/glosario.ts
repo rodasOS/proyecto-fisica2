@@ -1,0 +1,18 @@
+export const GLOSARIO: { termino: string; definicion: string; formula?: string }[] = [
+  { termino: 'Media (x̄)', definicion: 'Promedio aritmético: suma de los datos entre la cantidad de datos.', formula: '\\bar{x}=\\dfrac{\\sum x_i}{n}' },
+  { termino: 'Mediana', definicion: 'Valor central de los datos ordenados; la mitad es menor y la mitad mayor.' },
+  { termino: 'Moda', definicion: 'Valor que más se repite. Puede no existir o haber varias.' },
+  { termino: 'Rango', definicion: 'Diferencia entre el máximo y el mínimo.', formula: 'R=x_{max}-x_{min}' },
+  { termino: 'Varianza', definicion: 'Promedio de los cuadrados de las desviaciones respecto a la media (÷N poblacional, ÷(n−1) muestral).', formula: 's^2=\\dfrac{\\sum (x_i-\\bar{x})^2}{n-1}' },
+  { termino: 'Desviación estándar', definicion: 'Raíz cuadrada de la varianza; tiene las mismas unidades que los datos.', formula: 's=\\sqrt{s^2}' },
+  { termino: 'Incertidumbre de la media', definicion: 'Error estándar de la media: qué tan precisa es x̄ como estimación.', formula: 'u(\\bar{x})=\\dfrac{s}{\\sqrt{n}}' },
+  { termino: 'Coeficiente de variación', definicion: 'Dispersión relativa a la media, en porcentaje.', formula: 'CV=\\dfrac{s}{|\\bar{x}|}\\times100\\%' },
+  { termino: 'Cuartiles / IQR', definicion: 'Q1, Q2, Q3 dividen los datos ordenados en cuatro partes; IQR = Q3 − Q1.' },
+  { termino: 'Valor atípico', definicion: 'Dato fuera de [Q1 − 1.5·IQR, Q3 + 1.5·IQR].' },
+  { termino: 'Frecuencia (f, fr, F)', definicion: 'f: conteo en una clase; fr = f/n; F: frecuencia acumulada.' },
+  { termino: 'Puntaje z', definicion: 'Cuántas desviaciones estándar está un valor de la media.', formula: 'z=\\dfrac{x-\\mu}{\\sigma}' },
+  { termino: 'Distribución normal', definicion: 'Distribución en forma de campana, simétrica, definida por μ y σ.' },
+  { termino: 'Correlación (r)', definicion: 'Mide la relación lineal entre dos variables, de −1 a 1.', formula: 'r=\\dfrac{S_{xy}}{\\sqrt{S_{xx}S_{yy}}}' },
+  { termino: 'Coeficiente de determinación (r²)', definicion: 'Proporción de la variación de Y explicada linealmente por X.' },
+  { termino: 'Regresión lineal simple', definicion: 'Recta de mínimos cuadrados ŷ = a + bx que mejor ajusta los datos.', formula: '\\hat{y}=a+bx' },
+];

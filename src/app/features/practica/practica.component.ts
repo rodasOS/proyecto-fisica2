@@ -41,6 +41,9 @@ import { CajaResultadoComponent } from '../../shared/caja-resultado/caja-resulta
       </section>
       @if (cal() && cal()!.estado !== 'invalida') { <app-caja-resultado [resultado]="p.solucion" /> }
     }
+    <div class="progreso" role="progressbar" aria-label="Aciertos de la sesión" [attr.aria-valuemin]="0" [attr.aria-valuemax]="100" [attr.aria-valuenow]="porcentaje()">
+      <span [style.width.%]="porcentaje()"></span>
+    </div>
     <p class="marcador">Marcador de la sesión: <strong>{{ aciertos() }}/{{ total() }}</strong></p>
   `,
 })
@@ -54,6 +57,10 @@ export class PracticaComponent {
   protected readonly aciertos = signal(0);
   protected readonly total = signal(0);
   private calificada = false;
+
+  protected porcentaje(): number {
+    return this.total() ? Math.round((this.aciertos() / this.total()) * 100) : 0;
+  }
 
   generar(): void {
     this.practica.set(this.gen.generar(this.modulo(), this.dificultad()));

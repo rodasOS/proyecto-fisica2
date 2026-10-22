@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { EJEMPLOS, RUTA_MODULO } from '../../data/ejemplos';
 import { INFO } from '../../app.info';
+import { IconoComponent } from '../../shared/icono/icono.component';
 
 @Component({
   selector: 'app-inicio',
-  imports: [RouterLink],
+  imports: [RouterLink, IconoComponent],
   template: `
     <section class="hero">
       <h2>Bienvenido a {{ info.nombre }}</h2>
@@ -15,7 +16,7 @@ import { INFO } from '../../app.info';
     <h3>Módulos</h3>
     <div class="tarjetas">
       @for (m of modulos; track m.ruta) {
-        <a class="tarjeta" [routerLink]="m.ruta"><strong>{{ m.titulo }}</strong><span>{{ m.texto }}</span></a>
+        <a class="tarjeta" [routerLink]="m.ruta"><span class="icono-bloque" aria-hidden="true"><app-icono [n]="m.icono" /></span><strong>{{ m.titulo }}</strong><span>{{ m.texto }}</span></a>
       }
     </div>
     <h3 class="sep">Ejercicios de ejemplo ({{ ejemplos.length }})</h3>
@@ -47,13 +48,13 @@ export class InicioComponent {
   protected readonly info = INFO;
   protected readonly ejemplos = EJEMPLOS;
   protected readonly modulos = [
-    { ruta: '/descriptiva', titulo: 'Descriptiva', texto: 'Media, mediana, moda, rango, σ y s, cuartiles.' },
-    { ruta: '/datos-experimentales', titulo: 'Datos experimentales', texto: 'Mediciones con unidades, x̄ ± s/√n, conversión.' },
-    { ruta: '/tablas-graficas', titulo: 'Tablas y gráficas', texto: 'Frecuencias, histograma y dispersión.' },
-    { ruta: '/probabilidad', titulo: 'Probabilidad', texto: 'Probabilidad básica y distribución normal.' },
-    { ruta: '/correlacion-regresion', titulo: 'Correlación y regresión', texto: 'r, r², recta de mínimos cuadrados.' },
-    { ruta: '/practica', titulo: 'Práctica', texto: 'Ejercicios aleatorios con calificación.' },
-    { ruta: '/teoria', titulo: 'Teoría', texto: 'σ vs s, interpretación y glosario.' },
+    { ruta: '/descriptiva', icono: 'descriptiva', titulo: 'Descriptiva', texto: 'Media, mediana, moda, rango, σ y s, cuartiles.' },
+    { ruta: '/datos-experimentales', icono: 'experimentales', titulo: 'Datos experimentales', texto: 'Mediciones con unidades, x̄ ± s/√n, conversión.' },
+    { ruta: '/tablas-graficas', icono: 'tablas', titulo: 'Tablas y gráficas', texto: 'Frecuencias, histograma y dispersión.' },
+    { ruta: '/probabilidad', icono: 'probabilidad', titulo: 'Probabilidad', texto: 'Probabilidad básica y distribución normal.' },
+    { ruta: '/correlacion-regresion', icono: 'regresion', titulo: 'Correlación y regresión', texto: 'r, r², recta de mínimos cuadrados.' },
+    { ruta: '/practica', icono: 'practica', titulo: 'Práctica', texto: 'Ejercicios aleatorios con calificación.' },
+    { ruta: '/teoria', icono: 'teoria', titulo: 'Teoría', texto: 'σ vs s, interpretación y glosario.' },
   ];
   protected ruta(m: keyof typeof RUTA_MODULO): string {
     return RUTA_MODULO[m];

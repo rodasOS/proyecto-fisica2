@@ -22,7 +22,7 @@ export class GraficoComponent implements OnDestroy {
       this.tema.modo(); // se reconstruye al cambiar el tema
       const css = getComputedStyle(document.documentElement);
       Chart.defaults.color = css.getPropertyValue('--muted').trim() || '#566074';
-      Chart.defaults.borderColor = css.getPropertyValue('--border').trim() || '#dfe3ee';
+      Chart.defaults.borderColor = css.getPropertyValue('--line').trim() || '#e2e8f0';
       Chart.defaults.font.family = css.getPropertyValue('--fuente').trim() || 'system-ui';
       this.chart?.destroy();
       this.chart = new Chart(this.lienzo().nativeElement, {

@@ -57,6 +57,6 @@ export class ThemeService {
   private aplicar(t: Tema): void {
     const raiz = document.documentElement;
     raiz.setAttribute('data-theme', t === 'oscuro' ? 'dark' : 'light');
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', t === 'oscuro' ? '#0d1017' : '#4f46e5');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', t === 'oscuro' ? '#1c1f2b' : '#fff9f5');
   }
 }

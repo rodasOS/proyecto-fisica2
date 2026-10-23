@@ -1,10 +1,32 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ThemeService } from './theme.service';
+
+/** Simula un sistema en modo oscuro: el servicio no debe consultarlo. */
+function sistemaEnOscuro(): void {
+  vi.stubGlobal('matchMedia', () => ({ matches: true, addEventListener: () => {}, removeEventListener: () => {} }));
+}
 
 describe('ThemeService', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.removeAttribute('data-theme');
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('sin elección guardada usa claro aunque el sistema esté en oscuro', () => {
+    sistemaEnOscuro();
+    const s = new ThemeService();
+    expect(s.modo()).toBe('claro');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+  });
+
+  it('sin elección guardada y sin soporte de matchMedia usa claro', () => {
+    vi.stubGlobal('matchMedia', undefined);
+    const s = new ThemeService();
+    expect(s.modo()).toBe('claro');
   });
 
   it('usa la elección guardada al iniciar', () => {
@@ -14,10 +36,10 @@ describe('ThemeService', () => {
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
   });
 
-  it('sin elección usa claro cuando el sistema no indica oscuro', () => {
-    const s = new ThemeService();
-    expect(s.modo()).toBe('claro');
-    expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+  it('una elección guardada prevalece sobre el sistema', () => {
+    localStorage.setItem('sigmalab-tema', 'oscuro');
+    sistemaEnOscuro();
+    expect(new ThemeService().modo()).toBe('oscuro');
   });
 
   it('alternar cambia el tema y lo recuerda', () => {
@@ -28,6 +50,7 @@ describe('ThemeService', () => {
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
     s.alternar();
     expect(s.modo()).toBe('claro');
+    expect(localStorage.getItem('sigmalab-tema')).toBe('claro');
   });
 
   it('no falla si localStorage lanza', () => {

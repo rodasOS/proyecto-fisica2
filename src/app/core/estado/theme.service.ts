@@ -12,43 +12,26 @@ function leer(): Tema | null {
   }
 }
 
-function preferenciaSistema(): Tema {
-  try {
-    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro';
-  } catch {
-    return 'claro';
-  }
-}
-
-/** Tema claro/oscuro: preferencia del sistema por defecto, elección manual persistida. */
+/** Tema claro por defecto; la elección manual del usuario se persiste y prevalece. */
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private guardado = leer();
-  readonly modo = signal<Tema>(this.guardado ?? preferenciaSistema());
+  readonly modo = signal<Tema>(this.guardado ?? 'claro');
 
   constructor() {
     this.aplicar(this.modo());
-    try {
-      window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', (e) => {
-        if (!this.guardado) this.fijar(e.matches ? 'oscuro' : 'claro', false);
-      });
-    } catch {
-      /* sin soporte: se queda con el valor inicial */
-    }
   }
 
   alternar(): void {
-    this.fijar(this.modo() === 'oscuro' ? 'claro' : 'oscuro', true);
+    this.fijar(this.modo() === 'oscuro' ? 'claro' : 'oscuro');
   }
 
-  private fijar(t: Tema, persistir: boolean): void {
-    if (persistir) {
-      this.guardado = t;
-      try {
-        localStorage.setItem(CLAVE, t);
-      } catch {
-        /* almacenamiento no disponible */
-      }
+  private fijar(t: Tema): void {
+    this.guardado = t;
+    try {
+      localStorage.setItem(CLAVE, t);
+    } catch {
+      /* almacenamiento no disponible */
     }
     this.aplicar(t);
     this.modo.set(t);

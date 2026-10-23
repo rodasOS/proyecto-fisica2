@@ -30,14 +30,14 @@ describe('ThemeService', () => {
   });
 
   it('usa la elección guardada al iniciar', () => {
-    localStorage.setItem('sigmalab-tema', 'oscuro');
+    localStorage.setItem('estadix-tema', 'oscuro');
     const s = new ThemeService();
     expect(s.modo()).toBe('oscuro');
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
   });
 
   it('una elección guardada prevalece sobre el sistema', () => {
-    localStorage.setItem('sigmalab-tema', 'oscuro');
+    localStorage.setItem('estadix-tema', 'oscuro');
     sistemaEnOscuro();
     expect(new ThemeService().modo()).toBe('oscuro');
   });
@@ -46,11 +46,11 @@ describe('ThemeService', () => {
     const s = new ThemeService();
     s.alternar();
     expect(s.modo()).toBe('oscuro');
-    expect(localStorage.getItem('sigmalab-tema')).toBe('oscuro');
+    expect(localStorage.getItem('estadix-tema')).toBe('oscuro');
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
     s.alternar();
     expect(s.modo()).toBe('claro');
-    expect(localStorage.getItem('sigmalab-tema')).toBe('claro');
+    expect(localStorage.getItem('estadix-tema')).toBe('claro');
   });
 
   it('no falla si localStorage lanza', () => {

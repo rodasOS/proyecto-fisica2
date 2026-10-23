@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 
 export type Tema = 'claro' | 'oscuro';
-const CLAVE = 'sigmalab-tema';
+const CLAVE = 'estadix-tema';
 
 function leer(): Tema | null {
   try {

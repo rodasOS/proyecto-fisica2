@@ -1,4 +1,4 @@
-# SigmaLab — Asistente virtual de Estadística Aplicada
+# Estadix — Asistente virtual de Estadística Aplicada
 
 Proyecto académico UMG (Facultad de Ingeniería).
 
@@ -22,7 +22,7 @@ npm run build      # build de producción en dist/asistente-estadistica/browser
 - `src/app/core/parsers/` — lectura y validación de números.
 - `src/app/core/practica/` — generador de prácticas y calificación.
 - `src/app/features/` — un componente por módulo; `src/app/shared/` — fórmula (KaTeX), gráficos (Chart.js), caja de resultado.
-- `src/app/app.info.ts` — nombre del asistente, integrantes, asignatura y sección (la sección está pendiente de completar).
+- `src/app/app.info.ts` — nombre del asistente, integrantes, asignatura y sección.
 
 ## Pruebas
 
